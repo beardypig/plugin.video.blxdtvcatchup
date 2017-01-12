@@ -32,7 +32,7 @@ plugin = Plugin()
 @plugin.route('/')
 def index():
     return [{'label': info[0],
-             'path': "plugin://plugin.video.livestreamer/play?url={0}".format(quote(info[1])),
+             'path': "plugin://plugin.video.streamlink/play?url={0}".format(quote(info[1])),
              'is_playable': True,
              'thumbnail': 'http://tvcatchup.com/tvc-static//images/channels/v3/{0}.png'.format(cid)}
             for cid, info in CHANNEL_LIST.items()]

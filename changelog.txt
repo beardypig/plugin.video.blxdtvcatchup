@@ -1,3 +1,6 @@
+version 1.0.1
+- Actually use the new streamlink addon
+
 version 1.0.0
 - beardypig takes over development
 - updated to use streamlink addon

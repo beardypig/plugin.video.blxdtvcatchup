@@ -1,0 +1,30 @@
+sudo: false
+language: python
+python:
+- '3.5'
+env:
+- VERSION=${TRAVIS_TAG:-SNAPSHOT}
+script:
+- ./waf configure clean build dist
+- pushd build
+- md5sum "plugin.video.blxdtvcatchup-${VERSION}.zip" > "plugin.video.blxdtvcatchup-${VERSION}.zip.md5"
+- popd
+before_deploy:
+- mkdir -p dist/
+- cp build/*.zip build/*.zip.md5 icon.png build/addon.xml dist/
+deploy:
+  provider: s3
+  access_key_id: AKIAJA536STKTMHCZFZQ
+  secret_access_key:
+    secure: D9jXshOyovE4nD5ZlEeYyVKt7QCMYfDXmA6FbvyDb0ctuYBA3DOA8zpxTk4qQvTWtv/lQE7drYS7z8sNsHCWHDzPLt8Q8LZXSIVzKhvJwkBPwHP1JfVsP2BcptYHht5P4gH2noJmGRAc26j1fUbjNLOc+EMd8SYMzrWoaiBpU6aZdi/t4dB1ClndXJZwKkonqjRAa6lHbtfzhR+9lntVlQmONWf4AVgWNWeD08P6iiSC3fBwHHmbKStZ08Acill5XyWEYXGt2ni9IjHYVyU4o1n86LLWL+SgW+pfV31LquodaZ0+JKFVOskElzdNVlwOCxgZ7NdY7+GfuLaRgchnBPS92i6QeUEsUGASEG9bMPVX8JIV3AAIPmsruaN+ztHmvUD16MnLns1YjkpyTxSsFSaPFz7x+QspjVu69jsoesET527MmaVqry9qkAwt2AL2clyP2omDYxaPMYrft7Q6aWHlPxWxeJ/R5a1SB7TH87rYi2Jff0VZ5FHtDGwFLcsQ8RtDhZ8cnpw7NI+6Yzv4DYByDNVvhdt4PC7yF2Dce1IfzY4u2J9ElishaAdKPNgR/0hEhkOkPBoLf7O37sl9v2HALvHIy9GnGSMFKg2XswtwPAQizgoWRohXdjMlNcwFtUPbSWuoSk4xrwfn/Kwt6EMwALFqz73z0hIAXm8WYyI=
+  bucket: xbmc.beardypig.plugins
+  local-dir: dist
+  upload-dir: addons/plugin.video.blxdtvcatchup
+  skip_cleanup: true
+  on:
+    repo: beardypig/plugin.video.blxdtvcatchup
+    tags: true
+after_deploy:
+- gem install travis
+- curl -LO https://raw.github.com/mernst/plume-lib/master/bin/trigger-travis.sh
+- sh trigger-travis.sh beardypig xbmc.beardypig.plugins $TRAVIS_ACCESS_TOKEN

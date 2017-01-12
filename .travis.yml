@@ -13,17 +13,25 @@ before_deploy:
 - mkdir -p dist/
 - cp build/*.zip build/*.zip.md5 icon.png build/addon.xml dist/
 deploy:
-  provider: s3
-  access_key_id: AKIAJA536STKTMHCZFZQ
-  secret_access_key:
-    secure: D9jXshOyovE4nD5ZlEeYyVKt7QCMYfDXmA6FbvyDb0ctuYBA3DOA8zpxTk4qQvTWtv/lQE7drYS7z8sNsHCWHDzPLt8Q8LZXSIVzKhvJwkBPwHP1JfVsP2BcptYHht5P4gH2noJmGRAc26j1fUbjNLOc+EMd8SYMzrWoaiBpU6aZdi/t4dB1ClndXJZwKkonqjRAa6lHbtfzhR+9lntVlQmONWf4AVgWNWeD08P6iiSC3fBwHHmbKStZ08Acill5XyWEYXGt2ni9IjHYVyU4o1n86LLWL+SgW+pfV31LquodaZ0+JKFVOskElzdNVlwOCxgZ7NdY7+GfuLaRgchnBPS92i6QeUEsUGASEG9bMPVX8JIV3AAIPmsruaN+ztHmvUD16MnLns1YjkpyTxSsFSaPFz7x+QspjVu69jsoesET527MmaVqry9qkAwt2AL2clyP2omDYxaPMYrft7Q6aWHlPxWxeJ/R5a1SB7TH87rYi2Jff0VZ5FHtDGwFLcsQ8RtDhZ8cnpw7NI+6Yzv4DYByDNVvhdt4PC7yF2Dce1IfzY4u2J9ElishaAdKPNgR/0hEhkOkPBoLf7O37sl9v2HALvHIy9GnGSMFKg2XswtwPAQizgoWRohXdjMlNcwFtUPbSWuoSk4xrwfn/Kwt6EMwALFqz73z0hIAXm8WYyI=
-  bucket: xbmc.beardypig.plugins
-  local-dir: dist
-  upload-dir: addons/plugin.video.blxdtvcatchup
-  skip_cleanup: true
-  on:
-    repo: beardypig/plugin.video.blxdtvcatchup
-    tags: true
+  - provider: s3
+    access_key_id: AKIAJA536STKTMHCZFZQ
+    secret_access_key:
+      secure: D9jXshOyovE4nD5ZlEeYyVKt7QCMYfDXmA6FbvyDb0ctuYBA3DOA8zpxTk4qQvTWtv/lQE7drYS7z8sNsHCWHDzPLt8Q8LZXSIVzKhvJwkBPwHP1JfVsP2BcptYHht5P4gH2noJmGRAc26j1fUbjNLOc+EMd8SYMzrWoaiBpU6aZdi/t4dB1ClndXJZwKkonqjRAa6lHbtfzhR+9lntVlQmONWf4AVgWNWeD08P6iiSC3fBwHHmbKStZ08Acill5XyWEYXGt2ni9IjHYVyU4o1n86LLWL+SgW+pfV31LquodaZ0+JKFVOskElzdNVlwOCxgZ7NdY7+GfuLaRgchnBPS92i6QeUEsUGASEG9bMPVX8JIV3AAIPmsruaN+ztHmvUD16MnLns1YjkpyTxSsFSaPFz7x+QspjVu69jsoesET527MmaVqry9qkAwt2AL2clyP2omDYxaPMYrft7Q6aWHlPxWxeJ/R5a1SB7TH87rYi2Jff0VZ5FHtDGwFLcsQ8RtDhZ8cnpw7NI+6Yzv4DYByDNVvhdt4PC7yF2Dce1IfzY4u2J9ElishaAdKPNgR/0hEhkOkPBoLf7O37sl9v2HALvHIy9GnGSMFKg2XswtwPAQizgoWRohXdjMlNcwFtUPbSWuoSk4xrwfn/Kwt6EMwALFqz73z0hIAXm8WYyI=
+    bucket: xbmc.beardypig.plugins
+    local-dir: dist
+    upload-dir: addons/plugin.video.blxdtvcatchup
+    skip_cleanup: true
+    on:
+      repo: beardypig/plugin.video.blxdtvcatchup
+      tags: true
+  - provider: releases
+    api_key:
+      secure: Z0s2XTA6/QNBEcVXo2mFhoGxnD9esPmezur7JgCgfBigz7snY2/AXRYj9+WP/kWTb6R7Wk+lUrFI1srtyiOrAAot2xPJeYb4tDt+3Mh/rrhXC7q64+t7aHUA7PizjoRzfMIxZ1r1o86+Q/WnyDu0rdKtF2qHSqR55UKNPJiI7Wn53Dvh7WTksUG2q64so7FucAqeayQnEs+e1fTGFOYtKwa1I+xo2AOm1pDC8ndsRLu+psHPCVEch11x7eZiaCG2rrHajQkQsCbT8N/OwgMIIYS4Zd3Vgn220KMAeLmMnsRCYULq1H8W8EgJdSyKKbJheleOOT+2oNCBTQFY4jvgxhxWJdNQfbq3GfU5fpojyXlDT6ApjacOHFD/SSrKLO2T/8K3fB5BRseAsWeLRb5QcrXx5kUCwFkSteSIzMv961P8NDpMsuBv0IlEO4kcgrWc75M5DYKU7aHllOUvc0yvGkLr2QUTgLS9xGP1qc15nlrIMLvz84/ItgFMHrgMLPtaAIroTrVmeglt1ZSh2w0IMHobQGXCpSFjN00ufEA3MPMeb1bYZvscq+/AXAvWm3W0sSuBOEtoMyUooqNXb372hj9NTq1EaRnrj6KJv4uG5kuXdDx8Zd5gJDKDuFRg87zEPOm7BxyJhfMMsKGlYpicNQirijasuTaO/XE+EJmC8lk=
+    file: $TRAVIS_BUILD_DIR/build/plugin.video.blxdtvcatchup-$VERSION.zip
+    skip_cleanup: true
+    on:
+      repo: beardypig/plugin.video.blxdtvcatchup
+      tags: true
 after_deploy:
 - gem install travis
 - curl -LO https://raw.github.com/mernst/plume-lib/master/bin/trigger-travis.sh

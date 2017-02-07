@@ -11,7 +11,7 @@ def configure(ctx):
 def build(bld):
     bld(features="subst", source="addon.xml.in", target="addon.xml",
         APPNAME=APPNAME, VERSION=VERSION)
-    for f in ('LICENSE.txt', 'changelog.txt', 'resources', 'addon.py', 'icon.png'):
+    for f in ('LICENSE.txt', 'changelog.txt', 'resources', 'simpleplugin.py', 'addon.py', 'icon.png'):
         bld(rule='cp -r ${SRC} ${TGT}', source=bld.path.make_node(f), target=bld.path.get_bld().make_node(f))
 
 

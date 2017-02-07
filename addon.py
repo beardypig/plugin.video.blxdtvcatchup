@@ -1,6 +1,9 @@
-from urllib import quote
+import xbmcplugin
 
-from xbmcswift2 import Plugin
+from urllib import quote
+from simpleplugin import Plugin
+
+plugin = Plugin()
 
 CHANNEL_LIST = {
     ("BBC One", "bbcone"),
@@ -35,19 +38,16 @@ CHANNEL_LIST = {
     ("Craft Extra", "craftextra"),
 }
 
-plugin = Plugin()
 
-
-@plugin.route('/')
-def index():
+@plugin.action()
+def root(params):
     items = [{'label': name,
-              'path': "plugin://plugin.video.streamlink/play?url={0}".format(
-                  quote("http://tvcatchup.com/watch/{0}".format(shortname))
-              ),
+              'path': plugin.get_url("plugin://plugin.video.streamlink/",
+                                     url="http://tvcatchup.com/watch/{0}".format(shortname)),
               'is_playable': True,
               'thumbnail': 'http://new.tvcatchup.info/channel-images/{0}.png'.format(shortname)}
              for name, shortname in CHANNEL_LIST]
-    return plugin.finish(items, sort_methods=[])
+    return Plugin.create_listing(items, sort_methods=[xbmcplugin.SORT_METHOD_NONE])
 
 
 if __name__ == '__main__':

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="@APPNAME@" name="TV Catchup (blxd edition)" version="@VERSION@" provider-name="beardypig">
   <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.xbmcswift2" version="2.4.0"/>
-    <import addon="plugin.video.streamlink" version="0.2.0.0"/>
+    <import addon="xbmc.python" version="2.19.0"/>
+    <import addon="plugin.video.streamlink" version="0.3.0.0"/>
   </requires>
  <extension point="xbmc.python.pluginsource" library="addon.py">
     <provides>video</provides>

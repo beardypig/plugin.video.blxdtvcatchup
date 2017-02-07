@@ -40,13 +40,15 @@ plugin = Plugin()
 
 @plugin.route('/')
 def index():
-    return [{'label': name,
-             'path': "plugin://plugin.video.streamlink/play?url={0}".format(
-                 quote("http://tvcatchup.com/watch/{0}".format(shortname))
-             ),
-             'is_playable': True,
-             'thumbnail': 'http://new.tvcatchup.info/channel-images/{0}.png'.format(shortname)}
-            for name, shortname in CHANNEL_LIST]
+    items = [{'label': name,
+              'path': "plugin://plugin.video.streamlink/play?url={0}".format(
+                  quote("http://tvcatchup.com/watch/{0}".format(shortname))
+              ),
+              'is_playable': True,
+              'thumbnail': 'http://new.tvcatchup.info/channel-images/{0}.png'.format(shortname)}
+             for name, shortname in CHANNEL_LIST]
+    return plugin.finish(items, sort_methods=[])
+
 
 if __name__ == '__main__':
     plugin.run()

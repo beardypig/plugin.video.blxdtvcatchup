@@ -9,7 +9,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Live streams from TVCatchup.com</summary>
-    <disclaimer>May not work outside the UK/Ireland</disclaimer>
+    <disclaimer>May not work outside the UK</disclaimer>
     <platform>all</platform>
   </extension>
 </addon>

@@ -91,4 +91,5 @@ ENV/
 
 # waf files
 .waf-*/
+.waf3-*/
 .lock-waf*

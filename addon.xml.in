@@ -2,6 +2,7 @@
 <addon id="@APPNAME@" name="TV Catchup (blxd edition)" version="@VERSION@" provider-name="beardypig">
   <requires>
     <import addon="xbmc.python" version="2.19.0"/>
+    <import addon="script.module.six" version="1.9.0"/>
   </requires>
  <extension point="xbmc.python.pluginsource" library="addon.py">
     <provides>video</provides>

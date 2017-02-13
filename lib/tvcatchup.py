@@ -1,12 +1,8 @@
 import json
 import urllib2
-import re
-
 from httplib import HTTPException
 
 from retrying import Retrying
-
-stream_re = re.compile(r"""(?P<q>['"])(?P<stream_url>https?://.*m3u8\?.*clientKey=.*?)(?P=q)""")
 
 
 def retry_if_http_error(exception):

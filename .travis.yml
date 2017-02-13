@@ -1,10 +1,12 @@
 sudo: false
 language: python
 python:
-- '3.5'
+- '2.7'
 env:
 - VERSION=${TRAVIS_TAG:-SNAPSHOT}
 script:
+- python -m pytest tests --online
+after_success:
 - ./waf configure clean build dist
 - pushd build
 - md5sum "plugin.video.blxdtvcatchup-${VERSION}.zip" > "plugin.video.blxdtvcatchup-${VERSION}.zip.md5"

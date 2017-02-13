@@ -11,5 +11,7 @@
     <summary lang="en">Live streams from TVCatchup.com</summary>
     <disclaimer>May not work outside the UK</disclaimer>
     <platform>all</platform>
+    <forum>http://forum.kodi.tv/showthread.php?tid=220135</forum>
+    <source>https://github.com/beardypig/plugin.video.blxdtvcatchup</source>
   </extension>
 </addon>

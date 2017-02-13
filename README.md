@@ -1,4 +1,4 @@
-# plugin.video.blxdtvcatchup
+# plugin.video.blxdtvcatchup [![Build Status](https://travis-ci.org/beardypig/plugin.video.blxdtvcatchup.svg?branch=master)](https://travis-ci.org/beardypig/plugin.video.blxdtvcatchup)
 A basic TV Catchup Add-on for Kodi.
 
 - Author: beardypig, blxd

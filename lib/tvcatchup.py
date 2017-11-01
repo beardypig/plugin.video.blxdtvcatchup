@@ -20,7 +20,7 @@ class TVCatchupBlocked(TVCatchupError):
 
 class TVCatchup(object):
     API_URL = "http://www.tvcatchup.com/api/{0}"
-    USER_AGENT = "TVCatchup/1.0.1 (samsung/SM-J7008; Android 4.4.2/KOT49H)"
+    USER_AGENT = "TVCatchup/1.0 (iPhone; iOS 11.0; Scale/2.00)"
 
     def __init__(self, region=1):
         self.region = region

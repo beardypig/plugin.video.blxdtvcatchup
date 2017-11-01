@@ -1,4 +1,7 @@
 [B]Version 2.0.0[/B]
+- Fix channel listing error
+
+[B]Version 2.0.0[/B]
 - The streamlink module is no longer used to get the streams.
 - Added channel region settings, defaults to London
 

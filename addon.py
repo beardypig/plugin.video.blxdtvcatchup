@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
 
 import xbmcgui
 from retrying import RetryError
-from tvcatchup import TVCatchup, TVCatchupBlocked
+from tvcatchup import TVCatchup, TVCatchupBlocked, TVCatchupAgentBlocked
 from simpleplugin import Plugin
 
 plugin = Plugin()
@@ -16,7 +16,7 @@ _ = plugin.initialize_gettext()
 def play(params):
     channel_id = params.get("id") or 1
     region = TVCatchup.lookup_region(plugin.get_setting("region"))
-    api = TVCatchup(region)
+    api = TVCatchup(region, plugin.get_setting("useragent"))
 
     try:
         url = api.stream(channel_id)
@@ -32,6 +32,12 @@ def play(params):
             plugin.log_error("Failed to open stream {0} (Could not find stream URL)".format(params.get("slug")))
     except RetryError as err:
         plugin.log_error("Failed to open stream {0} ({1})".format(params.get("slug"), err.last_attempt))
+    except TVCatchupAgentBlocked as err:
+        plugin.log_error("Failed to open stream {0} (User Agent has been blocked)".format(params.get("slug"), err))
+
+        xbmcgui.Dialog().notification(_("Warning"),
+                                      _("User Agent has been blocked, set a custom User Agent in the Addon's settings"))
+        return Plugin.resolve_url(succeeded=False)
     except TVCatchupBlocked as err:
         plugin.log_error("Failed to open stream {0} (Blocked: {1})".format(params.get("slug"), err))
 

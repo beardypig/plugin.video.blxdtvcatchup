@@ -1,5 +1,6 @@
 import sys
 import os.path
+import urllib
 # force the lib directory in to the python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
 
@@ -16,14 +17,15 @@ _ = plugin.initialize_gettext()
 def play(params):
     channel_id = params.get("id") or 1
     region = TVCatchup.lookup_region(plugin.get_setting("region"))
-    api = TVCatchup(region, plugin.get_setting("useragent"))
+    user_agent = plugin.get_setting("useragent")
+    api = TVCatchup(region, user_agent)
 
     try:
         url = api.stream(channel_id)
 
         if url:
             return Plugin.resolve_url(play_item={
-                "path": url,
+                "path": url + "|User-Agent={0}".format(urllib.quote(user_agent)),
                 "label": params.get("name"),
                 "icon": params.get("logo"),
                 "info": {"Video": {"Plot": params.get("plot")}}
@@ -51,11 +53,12 @@ def root(params):
     items = []
 
     region = TVCatchup.lookup_region(plugin.get_setting("region"))
-    api = TVCatchup(region)
+    user_agent = plugin.get_setting("useragent")
+    api = TVCatchup(region, user_agent)
 
     for channel in api.channels():
         items.append({
-            "label": channel["name"],
+            "label": channel["name"] + (" [COLOR red][B](Off-air)[/B][/COLOR]" if channel["online"] != 1 else ""),
             "label2": channel["epg"]["programme_title"],
             "url": plugin.get_url(action="play",
                                   id=channel["id"],
@@ -65,8 +68,8 @@ def root(params):
                                   plot=channel["epg"]["programme_desc"],
                                   title=channel["epg"]["programme_title"]
                                   ),
-            "thumb": channel["logo"],
-            "is_playable": channel["online"] == 1,
+            "thumb": channel["logo"] + "|User-Agent={0}".format(urllib.quote(user_agent)),
+            "is_playable": True,
             "info": {
                 "Video": {
                     "Plot": channel["epg"]["programme_desc"],

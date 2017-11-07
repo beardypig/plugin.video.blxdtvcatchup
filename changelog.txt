@@ -1,3 +1,6 @@
+[B]Version 2.1.1[/B]
+- Fix ffmpeg User-Agent issue
+
 [B]Version 2.1.0[/B]
 - A custom User-Agent string setting.
 - Update default User-Agent to bypass streaming block.

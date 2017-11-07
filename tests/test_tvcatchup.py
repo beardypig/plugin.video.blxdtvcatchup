@@ -13,8 +13,6 @@ online = pytest.mark.skipif(
     reason="online test"
 )
 
-
-
 class TestTVCatchup(unittest.TestCase):
     def test_region_lookup(self):
         # default to London

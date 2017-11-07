@@ -75,9 +75,9 @@ class TVCatchup(object):
 
     def stream(self, channel_id):
         data = self.api_call("stream/{0}".format(channel_id))
-        if data['stream'].endswith('hls/ua.m3u8'):
-            raise TVCatchupAgentBlocked("User-Agent blocked")
         if data["blocked"]:
             raise TVCatchupBlocked(data.get("blocked_message"))
+        elif data["stream"].endswith("hls/ua.m3u8"):
+            raise TVCatchupAgentBlocked("User-Agent blocked")
         else:
             return data["stream"]

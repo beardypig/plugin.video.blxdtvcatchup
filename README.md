@@ -2,7 +2,7 @@
 A basic TV Catchup Add-on for Kodi.
 
 - Author: beardypig, blxd
-- Version: 2.0.1
+- Version: 2.1.0
 - Github: https://github.com/beardypig/plugin.video.blxdtvcatchup
 
 ## Download and Installation
